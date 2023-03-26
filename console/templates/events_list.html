@@ -1,0 +1,36 @@
+{% extends 'console_index.html' %}
+
+{% block title %}PAWReg - Console - Events{% endblock %}
+
+{% block console_section %}
+<div class="row">
+    <div class="col">
+        <h1>Events</h1>
+        <a href="{% url 'console:events-create' %}" class="btn btn-primary">Create Event</a>
+    </div>
+</div>
+<div class="row pt-2">
+    <div class="col">
+        <table class="table table-striped">
+            <thead class="table-dark">
+                <td>Short Name</td>
+                <td>Long Name</td>
+                <td>Start Date</td>
+                <td>End Date</td>
+            </thead>
+            <tbody>
+                {% for event in events %}
+                <tr>
+                    <td>
+                        <a href="{% url 'console:events-detail' event.id %}">{{ event.name_short }}</a>
+                    </td>
+                    <td>{{ event.name_long }}</td>
+                    <td>{{ event.event_start_date }}</td>
+                    <td>{{ event.event_end_date }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

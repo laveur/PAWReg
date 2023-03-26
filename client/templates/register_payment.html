@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}PAWReg - Payment{% endblock %}
+
+{% block content %}
+<div class="row mt-5">
+    <h1>Payment</h1>
+</div>
+<form action="{% url 'client:register-payment' %}" method="post" class="form">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col">
+            <input type="checkbox" class="form-check-input" name="is_paid" id="is_paid">
+            <label class="form-check-label" for="is_paid">Is Paid</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <button type="submit" class="btn btn-primary">Save Selection</button>
+        </div>
+    </div>
+</form>
+{% endblock %}

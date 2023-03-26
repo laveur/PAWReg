@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}PAWReg - Profile{% endblock %}
+
+{% block content %}
+<div class="row mt-5">
+    <div class="col-2">
+        <h1>My Profile</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-4">
+        <div class="card">
+            <form action="{% url 'client:profile' %}" method="post" class="form">
+                {% csrf_token %}
+                <div class="card-body">
+                    <p class="h5 card-title">Account Info</p>
+                    <input type="hidden" name="form" value="Account">
+                    {{account_form.as_div}}
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="card">
+            <form action="{% url 'client:profile' %}" method="post" class="form">
+                {% csrf_token %}
+                <div class="card-body">
+                    <p class="h5 card-title">Profile Info</p>
+                    <input type="hidden" name="form" value="Profile">
+                    {{profile_form.as_div}}
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

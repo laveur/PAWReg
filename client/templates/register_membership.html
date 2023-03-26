@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}PAWReg - Select Membership{% endblock %}
+
+{% block content %}
+<div class="row mt-5">
+    <h1>Select Membership</h1>
+</div>
+{% for membership in memberships %}
+<div class="row mt-2">
+    <div class="col-4 justify-content-center">
+        <div class="card">
+            <form action="{% url 'client:register-membership' %}" method="post" class="form">
+                {% csrf_token %}
+                <input type="hidden" name="membership" value="{{membership.id}}">
+                <div class="card-body">
+                    <p class="h5 card-title">{{membership.name_long}}</p>
+                    <p>{{membership.product_description}}</p>
+                    <p><strong>Price:</strong> ${{membership.tier1_pricing}}</p>
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Select</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}

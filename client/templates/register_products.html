@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block title %}PAWReg - Select Products{% endblock %}
+
+{% block content %}
+<div class="row mt-5">
+    <h1>Select Products</h1>
+</div>
+<form action="{% url 'client:register-products' %}" method="post" class="form">
+    {% csrf_token %}
+    <div class="row">
+        <h2>Included Products - {{membership.name_long}}</h2>
+    </div>
+    <div class="row">
+        {% for included_product in included_products %}
+        <div class="col-3">
+            <div class="card h-100">
+                <div class="card-header">
+                    <h5 class="card-title">{{included_product.name_long}}</h5>
+                </div>
+                <div class="card-body">
+                    <p>{{included_product.product_description}}</p>
+                </div>
+                {% if included_product.product_type.user_selection_required %}
+                <div class="card-footer">
+                    <select class="form-select" name="included_product_{{included_product.id}}_attr">
+                        {% for attribute in product_type_attributes %}
+                        <option value="{{attribute.name_short}}">{{attribute.name_long}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="row mt-2">
+        <h2>Additional Products</h2>
+    </div>
+    <div class="row">
+        {% for additional_product in additional_products %}
+        <div class="col-3">
+            <div class="card h-100">
+                <div class="card-header">
+                    <input type="checkbox" class="form-check-input" id="product_{{additional_product.id}}" name="product_{{additional_product.id}}">
+                    <label class="form-check-label" for="product_{{additional_product.id}}">
+                        <h5 class="card-title">{{additional_product.name_long}}</h5>
+                    </label>
+                </div>
+                <div class="card-body">
+                    <p>{{additional_product.product_description}}</p>
+                </div>
+                {% if additional_product.product_type.user_selection_required %}
+                <div class="card-footer">
+                    <select class="form-select">
+                        {% for attribute in product_type_attributes %}
+                        <option>{{attribute.name_long}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                {% endif %}
+                {% if additional_product.customer_modifiable %}
+                <div class="card-footer">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">$</span>
+                        <input type="text" class="form-control" name="product_{{additional_product.id}}_value" value="{{additional_product.tier1_pricing}}">
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="row mt-2">
+        <div class="col">
+            <button type="submit" class="btn btn-primary">Save Selection</button>
+        </div>
+    </div>
+</form>
+{% endblock %}

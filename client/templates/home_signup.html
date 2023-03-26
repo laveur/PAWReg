@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}PAWReg - Create Account{% endblock %}
+
+{% block content %}
+<div class="row mt-5 justify-content-center">
+    <div class="col-4">
+        <div class="card">
+            <form action="{% url 'client:signup' %}" method="post" class="form">
+                {% csrf_token %}
+                <div class="card-body">
+                    <p class="h5">Account Login</p>
+                    {{ signup_form.as_div }}
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Create Account</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

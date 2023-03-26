@@ -1,0 +1,72 @@
+{% extends 'console_index.html' %}
+
+{% block title %}PAWReg - Console - View Event{% endblock %}
+
+{% block console_section %}
+<div class="row">
+    <div class="col">
+        <h1>Event Details</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <form action="{% url 'console:events-detail' event.id %}" method="POST" class="form-sm">
+            {% csrf_token %}
+            {{form.as_div}}
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+</div>
+<div class="row mb-3">
+    <div class="col">
+        <h2>Products</h2>
+        
+        <a href="{% url 'console:products-create' event.id %}" class="btn btn-primary">Create Product</a>
+        <a href="{% url 'console:memberships-create' event.id %}" class="btn btn-primary">Create Membership</a>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <table class="table table-striped">
+            <thead class="table-dark">
+                <td>Short Name</td>
+                <td>Long Name</td>
+                <td>Tier 1 Pricing</td>
+                <td>Tier 2 Pricing</td>
+                <td>Tier 3 Pricing</td>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="5" class="table-info">Products</td>
+                </tr>
+                {% for product in products %}
+                <tr>
+                    <td>
+                        <a href="{% url 'console:products-detail' event.id product.id %}">{{product.name_short}}</a>
+                    </td>
+                    <td>{{product.name_long}}</td>
+                    <td>{{product.tier1_pricing}}</td>
+                    <td>{{product.tier2_pricing}}</td>
+                    <td>{{product.tier3_pricing}}</td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td colspan="5" class="table-info">Memberships</td>
+                </tr>
+                {% for membership in memberships %}
+                <tr>
+                    <td>
+                        <a
+                            href="{% url 'console:memberships-detail' event.id membership.id %}">{{membership.name_short}}</a>
+                    </td>
+                    <td>{{membership.name_long}}</td>
+                    <td>{{membership.tier1_pricing}}</td>
+                    <td>{{membership.tier2_pricing}}</td>
+                    <td>{{membership.tier3_pricing}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}PAWReg - Sign In{% endblock %}
+
+{% block content %}
+<div class="row mt-5 justify-content-center">
+    <div class="col-4">
+        <div class="card">
+            <form action="{{ request.get_full_path }}" method="post" class="form">
+                <div class="card-body">
+                    <p class="h5">Account Login</p>
+                    {% csrf_token %}
+                    {{signin_form.as_div}}
+                </div>
+                <div class="card-footer">
+                    <div>
+                        <button type="submit" class="btn btn-primary">Login</button>
+                        <a href="{% url 'client:forgot' %}" class="btn btn-secondary">Forgot Password</a>
+                    </div>
+                    <a href="{% url 'client:signup' %}">Create Account</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
