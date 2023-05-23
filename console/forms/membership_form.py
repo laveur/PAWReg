@@ -14,5 +14,7 @@ class MembershipForm(forms.ModelForm):
             'tier3_pricing',
             'available_at_event',
             'available_pre_event',
+            'available_parents',
+            'available_merchants',
             'included_products',
         )

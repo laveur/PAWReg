@@ -32,7 +32,7 @@ class RegisterPageView(TemplateView):
     def post(self, request, **kwargs):
         context = self.get_context_data(**kwargs)
 
-        form = RegistrationForm(request.POST, context['registration'])
+        form = RegistrationForm(request.POST, instance=context['registration'])
         context['form'] = form
 
         if form.is_valid():

@@ -1,0 +1,28 @@
+{% extends 'merchant_index.html' %}
+
+{% block title %}PAWReg - Merchant Tables{% endblock %}
+
+{% block merchant_section %}
+<div class="row mt-2">
+    <div class="col">
+        <table class="table table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <td>Short Name</td>
+                    <td>Long Name</td>
+                    <td>Price</td>
+                </tr>
+            </thead>
+            {% for table in tables %}
+            <tr>
+                <td>
+                    <a href="{% url 'merchant:table-detail' table.key %}">{{table.key}}</a>
+                </td>
+                <td>{{table.name}}</td>
+                <td>${{table.price}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock %}

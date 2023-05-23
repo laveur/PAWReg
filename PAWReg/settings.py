@@ -34,6 +34,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'client.apps.ClientConfig',
     'console.apps.ConsoleConfig',
+    'merchant.apps.MerchantConfig',
     'shared.apps.SharedConfig',
     'django.contrib.admin',
     'django.contrib.auth',

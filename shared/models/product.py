@@ -22,9 +22,11 @@ class Product(models.Model):
     customer_modifiable = models.BooleanField(
         default=False, verbose_name="Customer Modifiable")
     available_at_event = models.BooleanField(
-        default=False, verbose_name="At Event Availability")
+        default=True, verbose_name="At Event Availability")
     available_pre_event = models.BooleanField(
-        default=False, verbose_name="Pre Event Availability")
+        default=True, verbose_name="Pre Event Availability")
+    available_parent = models.BooleanField(default=False, verbose_name="Available to Parents")
+    available_merchant = models.BooleanField(default=False, verbose_name="Available to Merchants")
 
     def __str__(self):
         return self.name_long

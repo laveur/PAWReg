@@ -1,0 +1,20 @@
+{% extends 'merchant_index.html' %}
+
+{% block title %}PAWReg - Merchant Tables{% endblock %}
+
+{% block merchant_section %}
+<div class="row">
+    <div class="col">
+        <h1>Create Table</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col mb-3">
+        <form action="{%url 'merchant:table-detail' table.key %}" method="post" class="form">
+            {% csrf_token %}
+            {{form.as_div}}
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
